@@ -1,0 +1,36 @@
+{% extends 'events/base.html' %}
+{% block title %}{{ quiz.title }} - Event Finder{% endblock %}
+{% block content %}
+    <h1 class="mb-4">{{ quiz.title }}</h1>
+    <p class="lead mb-4">{{ quiz.description }}</p>
+
+    <form method="post" class="quiz-form">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="question card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Вопрос {{ forloop.counter }}: {{ question.text }}</h3>
+                    {% if question.image %}
+                        <img src="{{ question.image.url }}" alt="Изображение вопроса" class="question-image img-fluid rounded mb-3">
+                    {% endif %}
+                    {% if question.question_type == 'single' %}
+                        {% for option in question.get_options %}
+                            <div class="form-check mb-2">
+                                <input type="radio" name="question_{{ question.id }}" value="{{ forloop.counter }}" class="form-check-input" id="option_{{ question.id }}_{{ forloop.counter }}" required>
+                                <label class="form-check-label" for="option_{{ question.id }}_{{ forloop.counter }}">{{ option }}</label>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for option in question.get_options %}
+                            <div class="form-check mb-2">
+                                <input type="checkbox" name="question_{{ question.id }}" value="{{ forloop.counter }}" class="form-check-input" id="option_{{ question.id }}_{{ forloop.counter }}">
+                                <label class="form-check-label" for="option_{{ question.id }}_{{ forloop.counter }}">{{ option }}</label>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-lg">Отправить ответы</button>
+    </form>
+{% endblock %}

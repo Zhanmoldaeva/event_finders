@@ -1,0 +1,26 @@
+{% extends 'events/base.html' %}
+{% block title %}Главная - Event Finder{% endblock %}
+{% block content %}
+    <h1>Найдите свое следующее мероприятие</h1>
+    <div class="row">
+        {% for event in events %}
+            <div class="col-md-4 mb-4">
+                <div class="card event-card">
+                    {% if event.image %}
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.name }}">
+                    {% else %}
+                        <div class="card-img-top placeholder-img" style="height: 200px; background: #ddd;"></div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p class="card-text text-muted">{{ event.date|date:"d F Y" }} | {{ event.venue.city }}</p>
+                        <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+                        <a href="{% url 'events:event_detail' event.id %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Мероприятий пока нет.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

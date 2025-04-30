@@ -1,0 +1,29 @@
+{% extends 'events/base.html' %}
+{% block title %}Профиль - Event Finder{% endblock %}
+{% block content %}
+    <h1>Ваш профиль</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" class="img-fluid rounded-circle" alt="Фото профиля">
+            {% endif %}
+            <h3>{{ user.username }}</h3>
+            <p><strong>Город:</strong> {{ user.city|default:"Не указан" }}</p>
+        </div>
+        <div class="col-md-8">
+            <h4>Купленные билеты</h4>
+            {% for ticket in tickets %}
+                <p>{{ ticket.event.name }} - {{ ticket.quantity }} шт. - {{ ticket.total_price }} тг. ({{ ticket.purchase_date }})</p>
+            {% empty %}
+                <p class="text-muted">Вы пока не купили билеты.</p>
+            {% endfor %}
+
+            <h4>Регистрации</h4>
+            {% for registration in registrations %}
+                <p>{{ registration.event.name }} - {{ registration.registration_date }}</p>
+            {% empty %}
+                <p class="text-muted">Вы пока не зарегистрированы на события.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

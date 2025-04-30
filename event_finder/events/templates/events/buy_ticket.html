@@ -1,0 +1,11 @@
+{% extends 'events/base.html' %}
+{% block title %}Купить билет - {{ event.name }}{% endblock %}
+{% block content %}
+    <h1>Купить билет на "{{ event.name }}"</h1>
+    <p><strong>Цена за билет:</strong> {{ event.ticket_price }} тг.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Купить</button>
+    </form>
+{% endblock %}

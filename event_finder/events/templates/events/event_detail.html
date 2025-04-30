@@ -1,0 +1,45 @@
+{% extends 'events/base.html' %}
+{% block title %}{{ event.name }} - Event Finder{% endblock %}
+{% block content %}
+    <div class="event-detail-card">
+        <h1>{{ event.name }}</h1>
+        <div class="row">
+            <div class="col-md-6">
+                {% if event.image %}
+                    <img src="{{ event.image.url }}" class="img-fluid mb-3 rounded" alt="{{ event.name }}">
+                {% endif %}
+                <p>{{ event.description }}</p>
+                <p><strong>Дата:</strong> {{ event.date|date:"d F Y" }} {{ event.time|time:"H:i" }}</p>
+                <p><strong>Место:</strong> {{ event.venue.name }}, {{ event.venue.city }}</p>
+                <p><strong>Категория:</strong> {{ event.category.name }}</p>
+                <p><strong>Цена:</strong> {% if event.is_free %}Бесплатно{% else %}{{ event.ticket_price }} тг.{% endif %}</p>
+
+                {% if event.downloadable_file %}
+                    <p>
+                        <strong>Скачать файл:</strong>
+                        <a href="{{ event.downloadable_file.url }}" download class="btn btn-outline-primary">
+                            <i class="fas fa-download me-2"></i>Скачать {{ event.downloadable_file.name|cut:"event_files/" }}
+                        </a>
+                    </p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if user.is_authenticated %}
+                    {% if user.is_organizer and event.organizer == user %}
+                        <a href="{% url 'events:edit_event' event.id %}" class="btn btn-warning mb-3">Редактировать</a>
+                    {% endif %}
+                    {% if event.is_free %}
+                        <form method="post" action="{% url 'events:register_event' event.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'events:buy_ticket' event.id %}" class="btn btn-primary">Купить билет</a>
+                    {% endif %}
+                {% else %}
+                    <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы зарегистрироваться или купить билет.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

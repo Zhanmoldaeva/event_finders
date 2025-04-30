@@ -1,0 +1,12 @@
+{% extends 'events/base.html' %}
+{% block title %}Отзыв о событии - {{ event.name }}{% endblock %}
+{% block content %}
+    <h1>Оставьте отзыв о "{{ event.name }}"</h1>
+    <p>Пожалуйста, оцените событие и поделитесь своими впечатлениями.</p>
+    <form method="post" class="w-50">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+        <a href="{% url 'events:profile' %}" class="btn btn-secondary">Пропустить</a>
+    </form>
+{% endblock %}

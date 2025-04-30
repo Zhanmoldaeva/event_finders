@@ -1,0 +1,572 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контент */
+.content-wrapper {
+    flex: 1 0 auto;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Навигация */
+.navbar {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    transition: background 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #2c3e50;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #007bff;
+    transform: translateY(-2px);
+}
+
+.nav-link.btn-link {
+    padding: 0.5rem 1rem;
+    color: #2c3e50;
+}
+
+.nav-link.btn-link:hover {
+    color: #007bff;
+    transform: translateY(-2px);
+}
+
+/* Футер */
+.footer {
+    flex-shrink: 0;
+    background: rgba(44, 62, 80, 0.9);
+    color: #fff;
+    padding: 1.5rem 0;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.social-links {
+    margin-top: 0.5rem;
+}
+
+.social-icon {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #007bff;
+    transform: scale(1.2);
+}
+
+/* Темная тема */
+body[data-theme="dark"] {
+    background: linear-gradient(135deg, #1e2a44 0%, #2c3e50 100%);
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .navbar {
+    background: rgba(30, 42, 68, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .nav-link {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .nav-link:hover {
+    color: #66b0ff;
+}
+
+body[data-theme="dark"] .nav-link.btn-link {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .nav-link.btn-link:hover {
+    color: #66b0ff;
+}
+
+body[data-theme="dark"] .footer {
+    background: rgba(30, 42, 68, 0.9);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .social-icon {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .social-icon:hover {
+    color: #66b0ff;
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeInOut 3s forwards;
+    backdrop-filter: blur(5px);
+}
+
+.notification.success {
+    background: rgba(212, 237, 218, 0.9);
+    color: #155724;
+}
+
+.notification.error {
+    background: rgba(248, 215, 218, 0.9);
+    color: #721c24;
+}
+
+.notification.info {
+    background: rgba(209, 236, 241, 0.9);
+    color: #0c5460;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Переключатель тем */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg);
+}
+
+/* Общие элементы */
+h1 {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(to right, #007bff, #00c4b4);
+}
+
+body[data-theme="dark"] h1 {
+    color: #e0e0e0;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #00c4b4 100%);
+    border: none;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+body[data-theme="dark"] .btn-primary {
+    background: linear-gradient(135deg, #66b0ff 0%, #00c4b4 100%);
+}
+
+/* Карточки мероприятий */
+.event-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-card .card-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.event-card .card-text {
+    color: #666;
+}
+
+body[data-theme="dark"] .event-card {
+    background: rgba(44, 62, 80, 0.8);
+}
+
+body[data-theme="dark"] .event-card .card-title {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .event-card .card-text {
+    color: #b0b0b0;
+}
+
+/* Страница деталей мероприятия */
+.event-detail-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.event-detail-card img {
+    border-radius: 10px;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+body[data-theme="dark"] .event-detail-card {
+    background: rgba(44, 62, 80, 0.8);
+}
+
+/* Чат-бот */
+.chat-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.chat-bubble {
+    padding: 10px 15px;
+    border-radius: 15px;
+    display: inline-block;
+    max-width: 70%;
+    margin-bottom: 0.5rem;
+}
+
+.user-bubble {
+    background: linear-gradient(135deg, #007bff 0%, #00c4b4 100%);
+    color: #fff;
+}
+
+.bot-bubble {
+    background: #f5f5f5;
+    color: #333;
+}
+
+body[data-theme="dark"] .chat-container {
+    background: rgba(44, 62, 80, 0.8);
+}
+
+body[data-theme="dark"] .bot-bubble {
+    background: #3b4a5a;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .user-bubble {
+    background: linear-gradient(135deg, #66b0ff 0%, #00c4b4 100%);
+}
+
+/* Форма ввода в чат-боте */
+.chat-input-group {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.chat-input-group .input-group {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.chat-input-group .form-select,
+.chat-input-group .form-control {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+}
+
+.chat-input-group .form-select {
+    max-width: 180px;
+    border-radius: 50px 0 0 50px;
+}
+
+.chat-input-group .form-control {
+    flex: 1;
+}
+
+.chat-input-group .btn-outline-secondary {
+    border: none;
+    background: transparent;
+    color: #2c3e50;
+    transition: background 0.3s ease, color 0.3s ease;
+    padding: 1rem 1.5rem;
+}
+
+.chat-input-group .btn-outline-secondary i {
+    font-size: 1.5rem;
+}
+
+.chat-input-group .btn-outline-secondary:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #007bff;
+}
+
+.chat-input-group .btn-primary {
+    border-radius: 0 50px 50px 0;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+}
+
+.chat-input-group .btn-primary i {
+    font-size: 1.2rem;
+}
+
+body[data-theme="dark"] .chat-input-group .input-group {
+    background: rgba(44, 62, 80, 0.8);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .chat-input-group .form-select,
+body[data-theme="dark"] .chat-input-group .form-control {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .chat-input-group .form-select option {
+    background: #3b4a5a;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .chat-input-group .form-control::placeholder {
+    color: #b0b0b0;
+}
+
+body[data-theme="dark"] .chat-input-group .btn-outline-secondary {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .chat-input-group .btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #66b0ff;
+}
+
+/* Индикатор загрузки */
+.loading {
+    color: #007bff;
+    font-size: 0.9rem;
+}
+
+body[data-theme="dark"] .loading {
+    color: #66b0ff;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .chat-input-group .input-group {
+        flex-wrap: wrap;
+        border-radius: 15px;
+    }
+
+    .chat-input-group .form-select {
+        max-width: 100%;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .chat-input-group .form-control {
+        border-radius: 0;
+    }
+
+    .chat-input-group .btn-outline-secondary {
+        border-radius: 0;
+    }
+
+    .chat-input-group .btn-primary {
+        border-radius: 0 0 15px 15px;
+        width: 100%;
+    }
+}
+
+/* Стили для кнопки голосового ввода */
+#voice-input-btn {
+    transition: all 0.3s ease;
+}
+
+#voice-input-btn:hover {
+    background-color: #e9ecef;
+}
+
+#voice-input-btn.recording {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Анимация появления формы */
+.chat-input-group {
+    opacity: 0;
+    animation: slideUp 0.5s forwards 0.5s;
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Форма авторизации */
+.auth-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form .form-control {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    background: #f5f5f5;
+    transition: background 0.3s ease;
+}
+
+.auth-form .form-control:focus {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.auth-form .form-label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.auth-form .btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.auth-form p {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-form a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-form a:hover {
+    color: #0056b3;
+}
+
+body[data-theme="dark"] .auth-form {
+    background: rgba(44, 62, 80, 0.8);
+}
+
+body[data-theme="dark"] .auth-form .form-label {
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .auth-form .form-control {
+    background: #3b4a5a;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .auth-form .form-control:focus {
+    background: #4a5a6a;
+    box-shadow: 0 0 10px rgba(102, 176, 255, 0.3);
+}
+
+body[data-theme="dark"] .auth-form a {
+    color: #66b0ff;
+}
+
+body[data-theme="dark"] .auth-form a:hover {
+    color: #99c7ff;
+}
+.answer-analysis {
+    background: var(--card-bg);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.answer-analysis h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.answer-analysis p {
+    margin: 5px 0;
+}

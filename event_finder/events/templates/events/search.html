@@ -1,0 +1,30 @@
+{% extends 'events/base.html' %}
+{% block title %}Поиск - Event Finder{% endblock %}
+{% block content %}
+    <h1>Результаты поиска для "{{ query }}"</h1>
+    <form method="get" action="{% url 'events:search' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Введите запрос...">
+            <button type="submit" class="btn btn-primary">Поиск</button>
+        </div>
+    </form>
+    <div class="row">
+        {% for event in events %}
+            <div class="col-md-4">
+                <div class="card event-card">
+                    {% if event.image %}
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p><strong>Дата:</strong> {{ event.date }}</p>
+                        <p><strong>Место:</strong> {{ event.venue.city }}</p>
+                        <a href="{% url 'events:event_detail' event.id %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Ничего не найдено.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'events/base.html' %}
+{% block title %}Викторины - Event Finder{% endblock %}
+{% block content %}
+    <h1>Викторины</h1>
+    <div class="quiz-list">
+        {% if quizzes %}
+            <ul>
+                {% for quiz in quizzes %}
+                    <li>
+                        <h3><a href="{% url 'events:quiz_detail' quiz.id %}">{{ quiz.title }}</a></h3>
+                        <p>{{ quiz.description }}</p>
+                        <small>Создано: {{ quiz.created_at|date:"d M Y, H:i" }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Викторины пока недоступны. Пожалуйста, зайдите позже.</p>
+        {% endif %}
+    </div>
+{% endblock %}
